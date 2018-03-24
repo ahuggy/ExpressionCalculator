@@ -124,13 +124,13 @@ public class ExpressionCalculator implements ActionListener {
             // check 'expression' for errors
             try {
                 ErrorChecking checkErrors = new ErrorChecking(expression);
-            }
+				EvaluateExpression evaluateInput = new EvaluateExpression(expression);
+				outputExpression.setText(evaluateInput.solveExpression());
+			}
             catch (IllegalArgumentException iae){
                 errorMsg.setText(iae.getMessage());
                 return;
             }
-            EvaluateExpression evaluateInput = new EvaluateExpression(expression);
-            outputExpression.setText(evaluateInput.solveExpression());
         }
         if (ae.getSource() == clear){
             expressionInput.setText("");
