@@ -31,6 +31,7 @@ public class ExpressionCalculator implements ActionListener {
     private JPanel errorPanel = new JPanel();
     private JTextField errorMsg = new JTextField();
 
+    private String newLine = System.lineSeparator();
 
     public ExpressionCalculator() {
         // TODO Auto-generated constructor stub
@@ -66,7 +67,6 @@ public class ExpressionCalculator implements ActionListener {
         outputPanel.setLayout(new GridLayout(1,1));
         outputPanel.add(outputScrollPane);
         outputExpression.setEditable(false);
-        outputExpression.setText("test");
 
         //----------  Build errorPanel  ------------------
         errorPanel.setLayout(new GridLayout(1,1));
@@ -125,7 +125,7 @@ public class ExpressionCalculator implements ActionListener {
             try {
                 ErrorChecking checkErrors = new ErrorChecking(expression);
 				EvaluateExpression evaluateInput = new EvaluateExpression(expression);
-				outputExpression.setText(evaluateInput.solveExpression());
+				outputExpression.append(evaluateInput.solveExpression() + newLine);
 			}
             catch (IllegalArgumentException iae){
                 errorMsg.setText(iae.getMessage());
