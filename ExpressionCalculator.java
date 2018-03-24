@@ -1,3 +1,4 @@
+//Andrew Huggins & James Oden
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -121,8 +122,11 @@ public class ExpressionCalculator implements ActionListener {
             errorMsg.setText("");
             // assign user input to string 'expression'
             String expression = expressionInput.getText();
+            String xVal = xInput.getText();
             // check 'expression' for errors
             try {
+            	xSubstitution subX = new xSubstitution(expression, xVal);
+            	expression = subX.getUpdatedExpression();
                 ErrorChecking checkErrors = new ErrorChecking(expression);
 				EvaluateExpression evaluateInput = new EvaluateExpression(expression);
 				outputExpression.append(evaluateInput.solveExpression() + newLine);
