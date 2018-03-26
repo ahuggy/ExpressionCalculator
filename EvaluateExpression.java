@@ -9,6 +9,8 @@ public class EvaluateExpression {
     // class constructor assigns input to String 'expression'
     public EvaluateExpression(String expressionToBeCalculated) {
         expression = expressionToBeCalculated;
+        expression = expression.replace("pi", String.valueOf(Math.PI));
+        expression = expression.replace("e", String.valueOf(Math.E));
     }
 
     // public method 'solveExpression' solves the user input and returns the value
@@ -393,10 +395,16 @@ public class EvaluateExpression {
   	      // find operands!
   	      String leftOperand  = expression.substring(0,i).trim();
   	      String rightOperand = expression.substring(i+1).trim();
+        if (leftOperand.charAt(0) == 'u'){
+            leftOperand = '-' + leftOperand.substring(1,leftOperand.length());
+        }
+        if (rightOperand.charAt(0) == 'u'){
+            rightOperand = '-' + rightOperand.substring(1,rightOperand.length());
+        }
 
-  	      // convert operands from String to double 
+        // convert operands from String to double
   	      // Note that parseDouble() will allow a unary operator!
-  	      try { 
+  	      try {
   	          leftNumber = Double.parseDouble(leftOperand);
   	      }
   	      catch(NumberFormatException nfe)
