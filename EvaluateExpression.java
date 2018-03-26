@@ -388,7 +388,7 @@ public class EvaluateExpression {
   	       || (i == expression.length()-1))// or operator is last char
   	         {
   	         System.out.println("Expression is not an operator surrounded by operands.");
-  	       throw new IllegalArgumentException("Expression is not an operator surrounded by operands.");
+  	       throw new IllegalArgumentException("Expression is not an operator surrounded by operands: " + expression);
   	         //continue;
   	         }
 
@@ -410,7 +410,7 @@ public class EvaluateExpression {
   	      catch(NumberFormatException nfe)
   	          {
   	          System.out.println("Left operand is not numeric.");
-  	        throw new IllegalArgumentException("Left operand is not numeric.");
+  	        throw new IllegalArgumentException("Left operand is not numeric: " + leftOperand);
   	      //continue;
   	      }
   	      try {
@@ -419,7 +419,7 @@ public class EvaluateExpression {
   	      catch(NumberFormatException nfe)
   	          {
   	          System.out.println("Right operand is not numeric.");
-  	          throw new IllegalArgumentException("Right operand is not numeric.");
+  	          throw new IllegalArgumentException("Right operand is not numeric: " + rightOperand);
   	          //continue;
   	          }
 
