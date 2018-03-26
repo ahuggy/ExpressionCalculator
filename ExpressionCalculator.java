@@ -111,7 +111,7 @@ public class ExpressionCalculator implements ActionListener {
     public static void main(String[] args)
     {
 		System.out.println("Andrew Huggins & James Oden");
-        new ExpressionCalculator();
+		new ExpressionCalculator();
     }
 
     @Override

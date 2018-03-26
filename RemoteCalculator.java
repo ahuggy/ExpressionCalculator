@@ -1,8 +1,8 @@
 // RemoteCalculator class contains implementation of CalculatorInterface
 public class RemoteCalculator implements CalculatorInterface{
-    public double calculate(String expression, double x) throws Exception {
+    public double calculate(String expression, String x) throws Exception {
         String ExpressionToBeEvaluated;
-        String xVal = Double.toString(x);
+        String xVal = x;
         // check 'expression' for errors
         xSubstitution subX = new xSubstitution(expression, xVal);
         ExpressionToBeEvaluated = subX.getUpdatedExpression();
