@@ -135,14 +135,14 @@ public class ExpressionCalculator implements ActionListener {
                 errorMsg.setText(iae.getMessage());
                 return;
             }
+            catch (Exception e){
+                errorMsg.setText(e.getMessage());
+                return;
+            }
         }
         if (ae.getSource() == clear){
             expressionInput.setText("");
         }
     }
-	
-	
-	
-	
 
 }
