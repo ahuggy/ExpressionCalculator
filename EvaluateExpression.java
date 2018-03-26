@@ -25,11 +25,16 @@ public class EvaluateExpression {
     public void calculateInnerExpression() throws Exception{
         String innerMostExpression, expressionValue;
         int indexOfLeftP = 0, indexOfRightP = 0;
+        boolean leftPEncountered = false;
         for(int i=0;i<expression.length();i++){
             if(expression.charAt(i) == '('){
                 indexOfLeftP = i;
+                leftPEncountered = true;
             }
             if(expression.charAt(i) == ')'){
+                if (!leftPEncountered) {
+                    throw new IllegalArgumentException("Check your parenthesis order please.");
+                }
                 indexOfRightP = i;
                 innerMostExpression = expression.substring(indexOfLeftP+1,indexOfRightP);
                 expressionValue = solveInnerExpression(innerMostExpression);

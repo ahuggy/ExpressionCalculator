@@ -1,3 +1,4 @@
+//Andrew Huggins & James Oden
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,6 +32,7 @@ public class ExpressionCalculator implements ActionListener {
     private JPanel errorPanel = new JPanel();
     private JTextField errorMsg = new JTextField();
 
+    private String newLine = System.lineSeparator();
 
     public ExpressionCalculator() {
         // TODO Auto-generated constructor stub
@@ -66,7 +68,6 @@ public class ExpressionCalculator implements ActionListener {
         outputPanel.setLayout(new GridLayout(1,1));
         outputPanel.add(outputScrollPane);
         outputExpression.setEditable(false);
-        outputExpression.setText("test");
 
         //----------  Build errorPanel  ------------------
         errorPanel.setLayout(new GridLayout(1,1));
@@ -109,8 +110,8 @@ public class ExpressionCalculator implements ActionListener {
 
     public static void main(String[] args)
     {
-        System.out.println("Andrew Huggins & James Oden");
-        new ExpressionCalculator();
+		System.out.println("Andrew Huggins & James Oden");
+		new ExpressionCalculator();
     }
 
     @Override
@@ -121,16 +122,19 @@ public class ExpressionCalculator implements ActionListener {
             errorMsg.setText("");
             // assign user input to string 'expression'
             String expression = expressionInput.getText();
+            String xVal = xInput.getText();
             // check 'expression' for errors
             try {
+            	xSubstitution subX = new xSubstitution(expression, xVal);
+            	expression = subX.getUpdatedExpression();
                 ErrorChecking checkErrors = new ErrorChecking(expression);
-            }
+				EvaluateExpression evaluateInput = new EvaluateExpression(expression);
+				outputExpression.append(evaluateInput.solveExpression() + newLine);
+			}
             catch (IllegalArgumentException iae){
                 errorMsg.setText(iae.getMessage());
                 return;
             }
-            EvaluateExpression evaluateInput = new EvaluateExpression(expression);		//Should this go in the try/catch?
-            outputExpression.setText(evaluateInput.solveExpression());
         }
         if (ae.getSource() == clear){
             expressionInput.setText("");

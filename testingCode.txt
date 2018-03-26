@@ -1,0 +1,12 @@
+// This file contains scrap code used for testing the CalculatorInterface
+
+		String testingx;
+        try{
+			RemoteCalculator testingCalc = new RemoteCalculator();
+			testingx = testingCalc.calculate("34x52","44.56");
+			System.out.println(testingx);
+
+		}
+		catch (Exception e){
+
+		}
