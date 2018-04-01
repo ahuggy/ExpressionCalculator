@@ -1,3 +1,5 @@
+import com.sun.deploy.util.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,6 +7,7 @@ import java.util.List;
 public class EvaluateExpression {
     // class-variable that contains the expression input by the user
     String expression;
+    String finalValue;
 
     // class constructor assigns input to String 'expression'
     public EvaluateExpression(String expressionToBeCalculated) {
@@ -20,8 +23,23 @@ public class EvaluateExpression {
             calculateInnerExpression();
         }
         // evaluate the expression once all the parenthesis have been solved
-        return solveInnerExpression(expression);
+        finalValue = solveInnerExpression(expression);
+        checkForMultipleDecimals();
+        return finalValue;
     }
+
+	// method to ensure final value doesn't contain multiple decimals (Missing operand)
+	public void checkForMultipleDecimals(){
+		int counter = 0;
+		for (int i=0; i<finalValue.length(); i++) {
+			if (finalValue.charAt(i) == '.') {
+				counter++;
+			}
+		}
+		if (counter > 1){
+			throw new IllegalArgumentException("Missing operator.");
+		}
+	}
 
     // method to isolate the innermost parenthetical expression and solve (pass to inner function)
     public void calculateInnerExpression() throws Exception{
@@ -448,7 +466,8 @@ public class EvaluateExpression {
   	     // Note the Math class offers square root and cube root methods,
   	     // but the form used above allows higher-order roots. 
   	     expression = Double.toString(result);
-  	       return expression;
+		if(expression.startsWith("-")) expression = expression.replace("-", "u");
+		return expression;
   	     }
 
 }

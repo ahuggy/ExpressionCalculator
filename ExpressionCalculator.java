@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.swing.*;
 
-public class ExpressionCalculator implements ActionListener {
+public class ExpressionCalculator implements ActionListener, CalculatorInterface {
 
     private Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -114,6 +114,18 @@ public class ExpressionCalculator implements ActionListener {
 		new ExpressionCalculator();
     }
 
+    public double calculate(String expression, String x) throws Exception {
+        String ExpressionToBeEvaluated;
+        String xVal = x;
+        // check 'expression' for errors
+        xSubstitution subX = new xSubstitution(expression, xVal);
+        ExpressionToBeEvaluated = subX.getUpdatedExpression();
+        ErrorChecking checkErrors = new ErrorChecking(ExpressionToBeEvaluated);
+        EvaluateExpression evaluateInput = new EvaluateExpression(ExpressionToBeEvaluated);
+        return Double.parseDouble(evaluateInput.solveExpression());
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent ae) {
         // if the 'evaluate' button was pressed
@@ -135,6 +147,7 @@ public class ExpressionCalculator implements ActionListener {
                 errorMsg.setText(iae.getMessage());
                 return;
             }
+
             catch (Exception e){
                 errorMsg.setText(e.getMessage());
                 return;
